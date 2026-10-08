@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Ensures proper scaling and rendering on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sean C. Oxford | Chemical Engineering Portfolio</title>
+    
+    <!-- Google Fonts for professional, clean typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
+
+    <!-- CSS STYLESHEET -->
+    <style>
+        /* ==========================================================================
+           1. GLOBAL VARIABLES & RESET
+           Centralized color scheme and font variables for easy customization.
+           ========================================================================== */
+        :root {
+            --primary-color: #0f2a4a;      /* Deep Navy: Professional tone */
+            --accent-color: #0077b6;       /* Slate Blue: Interactive elements */
+            --text-dark: #2b2d42;          /* Off-Black: High-contrast body text */
+            --text-muted: #5c677d;         /* Muted Gray: Captions and subheadings */
+            --bg-light: #f8f9fa;           /* Off-White: Clean background */
+            --card-bg: #ffffff;            /* White: Container backgrounds */
+            --border-color: #e9ecef;       /* Subtle dividers and card outlines */
+            --radius: 8px;                 /* Rounded corner consistency */
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Soft drop shadow */
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-serif: 'Merriweather', Georgia, serif;
+        }
+
+        /* Basic browser reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling for internal anchor links */
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        /* ==========================================================================
+           2. NAVIGATION BAR
+           Sticky, top navigation for mobile and desktop screens.
+           ========================================================================== */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ==========================================================================
+           3. HERO / ABOUT SECTION
+           Introduces who you are, your academic background, and photo placeholder.
+           ========================================================================== */
+        .hero {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.15rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text p {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .profile-image-container {
+            text-align: center;
+        }
+
+        /* Responsive image circle placeholder */
+        .profile-img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--card-bg);
+            box-shadow: var(--shadow);
+            background-color: var(--border-color); /* Placeholder color if image fails */
+        }
+
+        /* ==========================================================================
+           4. MAIN CONTENT LAYOUT & SECTIONS
+           Reusable styling for main container blocks and card grids.
+           ========================================================================== */
+        .section-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 0.25rem;
+        }
+
+        /* General card layout styling */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        /* ==========================================================================
+           5. PROJECTS SECTION
+           Structures your key technical projects with clear tags and details.
+           ========================================================================== */
+        .project-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            list-style: none;
+        }
+
+        .tag {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            color: var(--primary-color);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+        }
+
+        /* ==========================================================================
+           6. SKILLS & COMPETENCIES SECTION
+           Grid display for dividing skills into distinct categories.
+           ========================================================================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skills-category h3 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .skills-category ul {
+            list-style: none;
+        }
+
+        .skills-category li {
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        /* ==========================================================================
+           7. CONTACT & FOOTER SECTION
+           Clean layout for your email, LinkedIn, and form placeholder.
+           ========================================================================== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-form label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-form input, 
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.6rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            font-size: 0.85rem;
+            margin-top: 3rem;
+        }
+
+        /* ==========================================================================
+           8. RESPONSIVE DESIGN (MEDIA QUERIES)
+           Adjusts element stacking on mobile devices and tablets.
+           ========================================================================== */
+        @media (max-width: 768px) {
+            .hero, .contact-grid {
+                grid-template-columns: 1fr; /* Stack layout vertically on small screens */
+            }
+
+            .hero {
+                text-align: center;
+            }
+
+            .profile-img {
+                margin: 0 auto;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION HEADER -->
+    <header>
+        <nav class="nav-container">
+            <a href="#" class="logo">Sean C. Oxford</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO / ABOUT SECTION -->
+    <section id="about" class="hero">
+        <div class="hero-text">
+            <h1>Sean C. Oxford</h1>
+            <div class="subtitle">B.S. Chemical Engineering Candidate | University of New Haven</div>
+            
+            <p>As a Chemical Engineering candidate at the University of New Haven, my passion for the field stems from a strong foundation in chemistry combined with a drive to solve practical, real-world problems[cite: 1]. Driven by a desire to use technical knowledge to make a positive impact on others, I chose engineering to bridge the gap between scientific theory and meaningful application[cite: 1].</p>
+            
+            <p>Through my coursework and independent projects, I have developed a strong foundation in experimental design, data analysis, and technical writing[cite: 1]. My hands-on work ranges from researching and formulating a skin barrier moisturizer using lipid hydration principles to designing a conceptual fungal fuel cell for sustainable energy generation[cite: 1]. Supported by skills in analytical software, programming tools like C# and R, and laboratory techniques such as titration and distillation, I approach every challenge with an emphasis on systematic research and user-focused problem-solving[cite: 1].</p>
+
+            <p>Looking ahead, I am eager to keep my options open across different sectors of chemical engineering—whether in sustainable technologies, consumer product design, or biotechnology. My focus remains on learning, adapting, and contributing to innovative solutions that improve everyday life and deliver real value to the people using them.</p>
+        </div>
+
+        <div class="profile-image-container">
+            <!-- Replace 'profile-placeholder.jpg' with your actual image path once uploaded to GitHub -->
+            <img src="profile-placeholder.jpg" alt="Sean C. Oxford" class="profile-img" onerror="this.src='https://via.placeholder.com/220?text=Sean+C.+Oxford'">
+        </div>
+    </section>
+
+    <!-- ACADEMIC PROJECTS SECTION -->
+    <section id="projects" class="section-container">
+        <h2 class="section-title">Academic Projects & Research Highlights</h2>
+
+        <!-- Project 1 -->
+        <article class="card">
+            <h3 class="project-title">Physiological Lipid Ratio Modeling & Skin Barrier Moisturizer Formulation</h3>
+            <div class="project-meta">Focus: Formulations, Stoichiometry, & Applied Chemistry</div>
+            <p>Conducted extensive scientific literature research on transepidermal water loss (TEWL) and physiological lipid structures to design and synthesize a targeted skin barrier moisturizer[cite: 1]. Addressed ingredient concentration constraints by mathematically modeling and balancing varying lipid profiles in raw materials to achieve a precise 3:1:1:1 ratio of ceramides, cholesterol, nonessential fatty acids, and essential fatty acids[cite: 1].</p>
+            
+            <ul class="tag-list">
+                <li class="tag">Design of Experiments (DoE)</li>
+                <li class="tag">Literature Review</li>
+                <li class="tag">Ratio Modeling</li>
+                <li class="tag">Emulsification</li>
+            </ul>
+            <p><strong>Key Takeaway:</strong> Mastered adjusting mathematical formulations when working with variable raw ingredients (e.g., optimizing milk and olive oil fractions for ceramide yield) rather than ideal textbook values[cite: 1].</p>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="card">
+            <h3 class="project-title"><em>Trametes versicolor</em> Enzymatic Fuel Cell Design & PEM Longevity Optimization</h3>
+            <div class="project-meta">Focus: Bioelectrochemical Systems & Materials Compatibility</div>
+            <p>Designed a bioelectrochemical system concept utilizing <em>Trametes versicolor</em> metabolism to break down plastic substrates and produce disassociated protons for electrical energy generation[cite: 1]. Identified a critical biological trade-off: the fungal enzymes targeted plastic-based Proton Exchange Membranes (PEM), requiring system operation limits to short-burst applications (such as powering a small vehicle during a race) to prevent structural degradation[cite: 1].</p>
+            
+            <ul class="tag-list">
+                <li class="tag">Bioelectrochemical Systems</li>
+                <li class="tag">Metabolic Pathway Analysis</li>
+                <li class="tag">PEM Design</li>
+                <li class="tag">Trade-Off Analysis</li>
+            </ul>
+            <p><strong>Key Takeaway:</strong> Mastered evaluating materials compatibility and biochemical kinetics in engineered systems, learning to optimize short-duration performance around strict biological constraints[cite: 1].</p>
+        </article>
+    </section>
+
+    <!-- SKILLS & COMPETENCIES SECTION -->
+    <section id="skills" class="section-container">
+        <h2 class="section-title">Skills & Technical Competencies</h2>
+
+        <div class="card">
+            <div class="skills-grid">
+                <!-- Programming & Software -->
+                <div class="skills-category">
+                    <h3>Software & Computing</h3>
+                    <ul>
+                        <li><strong>Languages:</strong> C#, VBA, R[cite: 1]</li>
+                        <li><strong>CAD Software:</strong> Onshape[cite: 1]</li>
+                        <li><strong>Data & Office:</strong> Excel, Word, PowerPoint, Google Docs/Sheets/Slides[cite: 1]</li>
+                        <li><strong>Emerging Tools:</strong> AI Prompt Engineering & Analysis</li>
+                    </ul>
+                </div>
+
+                <!-- Laboratory Techniques -->
+                <div class="skills-category">
+                    <h3>Laboratory Techniques</h3>
+                    <ul>
+                        <li>Quantitative Titration[cite: 1]</li>
+                        <li>Distillation Protocols[cite: 1]</li>
+                        <li>Emulsification & Formulations[cite: 1]</li>
+                        <li>Lab Safety Protocols & ServSafe Certified[cite: 1]</li>
+                    </ul>
+                </div>
+
+                <!-- Core Engineering Strengths -->
+                <div class="skills-category">
+                    <h3>Core Methodologies</h3>
+                    <ul>
+                        <li>Experimental Design & Data Analysis[cite: 1]</li>
+                        <li>Scientific Literature Review[cite: 1]</li>
+                        <li>Technical Writing & Documentation[cite: 1]</li>
+                        <li>Engineering Analysis[cite: 1]</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section-container">
+        <h2 class="section-title">Get In Touch</h2>
+
+        <div class="card">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <p>I am always eager to discuss undergraduate research, internship opportunities, or collaborative projects.</p>
+                    <p><strong>Email:</strong> <a href="mailto:soxfo1@unh.newhaven.edu">soxfo1@unh.newhaven.edu</a></p>
+                    <p><strong>Location:</strong> University of New Haven, West Haven, CT[cite: 1]</p>
+                    <p><strong>Honors:</strong> Presidential Scholar, High Honors (2021–2025)[cite: 1]</p>
+                </div>
+
+                <!-- Contact Form Placeholder -->
+                <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Message feature placeholder: Add Formspree or email handler.');">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your Name">
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" required placeholder="Your message..."></textarea>
+
+                    <button type="submit" class="btn-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Sean C. Oxford. Built with HTML5 & CSS3. Hosted on GitHub Pages.</p>
+    </footer>
+
+</body>
+</html>
